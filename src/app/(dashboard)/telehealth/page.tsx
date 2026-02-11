@@ -14,13 +14,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Plus, Video, Phone, Calendar } from "lucide-react";
 
 const statusMap: Record<string, { label: string; variant: "default" | "secondary" | "outline" | "destructive" }> = {
-  scheduled: { label: "Da len lich", variant: "outline" },
-  confirmed: { label: "Da xac nhan", variant: "default" },
-  completed: { label: "Hoan thanh", variant: "secondary" },
-  cancelled: { label: "Da huy", variant: "destructive" },
+  scheduled: { label: "Đã lên lịch", variant: "outline" },
+  confirmed: { label: "Đã xác nhận", variant: "default" },
+  completed: { label: "Hoàn thành", variant: "secondary" },
+  cancelled: { label: "Đã hủy", variant: "destructive" },
 };
 
-const typeMap: Record<string, string> = { followup: "Tai kham", initial: "Lan dau", telehealth: "Online" };
+const typeMap: Record<string, string> = { followup: "Tái khám", initial: "Lần đầu", telehealth: "Online" };
 
 const weekDays = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
 
@@ -40,39 +40,39 @@ export default function TelehealthPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">Telehealth</h1><p className="text-muted-foreground">Quan ly lich tu van va cuoc goi video</p></div>
+        <div><h1 className="text-2xl font-bold">Telehealth</h1><p className="text-muted-foreground">Quản lý lịch tư vấn và cuộc gọi video</p></div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild><Button><Plus className="mr-2 h-4 w-4" />Tao lich hen</Button></DialogTrigger>
+          <DialogTrigger asChild><Button><Plus className="mr-2 h-4 w-4" />Tạo lịch hẹn</Button></DialogTrigger>
           <DialogContent>
-            <DialogHeader><DialogTitle>Tao lich hen moi</DialogTitle></DialogHeader>
+            <DialogHeader><DialogTitle>Tạo lịch hẹn mới</DialogTitle></DialogHeader>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>Benh nhan</Label>
+                <Label>Bệnh nhân</Label>
                 <Select>
-                  <SelectTrigger><SelectValue placeholder="Chon benh nhan" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Chọn bệnh nhân" /></SelectTrigger>
                   <SelectContent>{patients.map((p) => (<SelectItem key={p.id} value={p.id}>{p.fullName}</SelectItem>))}</SelectContent>
                 </Select>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2"><Label>Ngay</Label><Input type="date" /></div>
-                <div className="space-y-2"><Label>Gio</Label><Input type="time" /></div>
+                <div className="space-y-2"><Label>Ngày</Label><Input type="date" /></div>
+                <div className="space-y-2"><Label>Giờ</Label><Input type="time" /></div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2"><Label>Thoi luong (phut)</Label><Input type="number" defaultValue={30} /></div>
+                <div className="space-y-2"><Label>Thời lượng (phút)</Label><Input type="number" defaultValue={30} /></div>
                 <div className="space-y-2">
-                  <Label>Loai</Label>
-                  <Select><SelectTrigger><SelectValue placeholder="Chon loai" /></SelectTrigger><SelectContent><SelectItem value="telehealth">Online</SelectItem><SelectItem value="followup">Tai kham</SelectItem><SelectItem value="initial">Lan dau</SelectItem></SelectContent></Select>
+                  <Label>Loại</Label>
+                  <Select><SelectTrigger><SelectValue placeholder="Chọn loại" /></SelectTrigger><SelectContent><SelectItem value="telehealth">Online</SelectItem><SelectItem value="followup">Tái khám</SelectItem><SelectItem value="initial">Lần đầu</SelectItem></SelectContent></Select>
                 </div>
               </div>
-              <div className="space-y-2"><Label>Ghi chu</Label><Textarea placeholder="Ghi chu..." rows={2} /></div>
-              <Button className="w-full" onClick={() => { setDialogOpen(false); alert("Da tao lich hen!"); }}>Tao lich hen</Button>
+              <div className="space-y-2"><Label>Ghi chú</Label><Textarea placeholder="Ghi chú..." rows={2} /></div>
+              <Button className="w-full" onClick={() => { setDialogOpen(false); alert("Đã tạo lịch hẹn!"); }}>Tạo lịch hẹn</Button>
             </div>
           </DialogContent>
         </Dialog>
       </div>
 
       <Card>
-        <CardHeader><CardTitle className="text-base flex items-center gap-2"><Calendar className="h-4 w-4" />Lich tuan nay</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-base flex items-center gap-2"><Calendar className="h-4 w-4" />Lịch tuần này</CardTitle></CardHeader>
         <CardContent>
           <div className="grid grid-cols-7 gap-2">
             {weekDates.map((date, i) => {
@@ -100,10 +100,10 @@ export default function TelehealthPage() {
       </Card>
 
       <Card>
-        <CardHeader><CardTitle className="text-base">Tat ca lich hen</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-base">Tất cả lịch hẹn</CardTitle></CardHeader>
         <CardContent>
           <Table>
-            <TableHeader><TableRow><TableHead>Benh nhan</TableHead><TableHead>Ngay gio</TableHead><TableHead>Thoi luong</TableHead><TableHead>Loai</TableHead><TableHead>Trang thai</TableHead><TableHead /></TableRow></TableHeader>
+            <TableHeader><TableRow><TableHead>Bệnh nhân</TableHead><TableHead>Ngày giờ</TableHead><TableHead>Thời lượng</TableHead><TableHead>Loại</TableHead><TableHead>Trạng thái</TableHead><TableHead /></TableRow></TableHeader>
             <TableBody>
               {appointments.map((a) => {
                 const s = statusMap[a.status];
@@ -111,7 +111,7 @@ export default function TelehealthPage() {
                   <TableRow key={a.id}>
                     <TableCell className="font-medium">{a.patientName}</TableCell>
                     <TableCell>{new Date(a.scheduledAt).toLocaleDateString("vi-VN")} {new Date(a.scheduledAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</TableCell>
-                    <TableCell>{a.durationMinutes} phut</TableCell>
+                    <TableCell>{a.durationMinutes} phút</TableCell>
                     <TableCell>{typeMap[a.type]}</TableCell>
                     <TableCell><Badge variant={s.variant}>{s.label}</Badge></TableCell>
                     <TableCell>

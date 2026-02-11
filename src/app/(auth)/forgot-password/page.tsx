@@ -35,25 +35,25 @@ export default function ForgotPasswordPage() {
         <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
           <Mail className="h-6 w-6 text-primary" />
         </div>
-        <CardTitle className="text-2xl">Quen mat khau</CardTitle>
+        <CardTitle className="text-2xl">Quên mật khẩu</CardTitle>
         <CardDescription>
-          Nhap email cua ban, chung toi se gui lien ket dat lai mat khau
+          Nhập email của bạn, chúng tôi sẽ gửi liên kết đặt lại mật khẩu
         </CardDescription>
       </CardHeader>
 
       {sent ? (
         <CardContent className="space-y-4 text-center">
           <div className="rounded-lg bg-green-50 p-4 text-sm text-green-700">
-            Lien ket dat lai mat khau da duoc gui den{" "}
-            <span className="font-medium">{email}</span>. Vui long kiem tra hop
-            thu cua ban.
+            Liên kết đặt lại mật khẩu đã được gửi đến{" "}
+            <span className="font-medium">{email}</span>. Vui lòng kiểm tra hộp
+            thư của bạn.
           </div>
           <Button
             variant="outline"
             className="w-full"
             onClick={() => setSent(false)}
           >
-            Gui lai
+            Gửi lại
           </Button>
         </CardContent>
       ) : (
@@ -73,7 +73,7 @@ export default function ForgotPasswordPage() {
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Dang xu ly..." : "Gui lien ket dat lai"}
+              {loading ? "Đang xử lý..." : "Gửi liên kết đặt lại"}
             </Button>
           </CardFooter>
         </form>
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
           className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
           <ArrowLeft className="h-4 w-4" />
-          Quay lai dang nhap
+          Quay lại đăng nhập
         </Link>
       </div>
     </Card>

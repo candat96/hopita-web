@@ -24,19 +24,19 @@ export default function ProtocolsPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Phac do tap luyen</h1>
-          <p className="text-muted-foreground">Quan ly cac phac do phuc hoi chuc nang</p>
+          <h1 className="text-2xl font-bold">Phác đồ tập luyện</h1>
+          <p className="text-muted-foreground">Quản lý các phác đồ phục hồi chức năng</p>
         </div>
-        <Button asChild><Link href="/protocols/new"><Plus className="mr-2 h-4 w-4" />Tao phac do moi</Link></Button>
+        <Button asChild><Link href="/protocols/new"><Plus className="mr-2 h-4 w-4" />Tạo phác đồ mới</Link></Button>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Tim kiem phac do..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+          <Input placeholder="Tìm kiếm phác đồ..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
         </div>
         <select value={conditionFilter} onChange={(e) => setConditionFilter(e.target.value)} className="h-10 rounded-md border border-input bg-background px-3 text-sm">
-          <option value="">Tat ca benh ly</option>
+          <option value="">Tất cả bệnh lý</option>
           {conditions.map((c) => (<option key={c} value={c}>{c}</option>))}
         </select>
       </div>
@@ -55,13 +55,13 @@ export default function ProtocolsPage() {
               <div className="space-y-3">
                 <Badge variant="outline">{protocol.targetCondition}</Badge>
                 <div className="grid grid-cols-3 gap-2 text-sm">
-                  <div className="flex items-center gap-1.5 text-muted-foreground"><Dumbbell className="h-3.5 w-3.5" /><span>{protocol.exercises.length} bai tap</span></div>
-                  <div className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" /><span>{protocol.durationWeeks} tuan</span></div>
+                  <div className="flex items-center gap-1.5 text-muted-foreground"><Dumbbell className="h-3.5 w-3.5" /><span>{protocol.exercises.length} bài tập</span></div>
+                  <div className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" /><span>{protocol.durationWeeks} tuần</span></div>
                   <div className="flex items-center gap-1.5 text-muted-foreground"><Users className="h-3.5 w-3.5" /><span>{protocol.assignedPatientCount} BN</span></div>
                 </div>
               </div>
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <Link href={`/protocols/${protocol.id}`}>Chi tiet</Link>
+                <Link href={`/protocols/${protocol.id}`}>Chi tiết</Link>
               </Button>
             </CardContent>
           </Card>

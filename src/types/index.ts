@@ -156,16 +156,14 @@ export interface VideoAnnotation {
   type: "error" | "improvement" | "good";
 }
 
-export interface Facility {
+export interface ExerciseCategory {
   id: string;
   name: string;
-  address: string;
-  phone: string;
-  logoUrl?: string;
-  doctorCount: number;
-  patientCount: number;
+  description?: string;
+  exerciseCount: number;
   createdAt: string;
 }
+
 
 export interface ComplianceDataPoint {
   week: string;

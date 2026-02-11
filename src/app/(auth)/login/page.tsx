@@ -37,9 +37,9 @@ export default function LoginPage() {
   return (
     <Card className="shadow-xl border-0">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Dang nhap</CardTitle>
+        <CardTitle className="text-2xl">Đăng nhập</CardTitle>
         <CardDescription>
-          Nhap thong tin tai khoan de truy cap he thong
+          Nhập thông tin tài khoản để truy cập hệ thống
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -58,12 +58,12 @@ export default function LoginPage() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Mat khau</Label>
+              <Label htmlFor="password">Mật khẩu</Label>
               <Link
                 href="/forgot-password"
                 className="text-sm text-primary hover:underline"
               >
-                Quen mat khau?
+                Quên mật khẩu?
               </Link>
             </div>
             <div className="relative">
@@ -96,19 +96,19 @@ export default function LoginPage() {
               onCheckedChange={(v) => setRemember(v as boolean)}
             />
             <Label htmlFor="remember" className="text-sm font-normal">
-              Ghi nho dang nhap
+              Ghi nhớ đăng nhập
             </Label>
           </div>
         </CardContent>
 
         <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Dang xu ly..." : "Dang nhap"}
+            {loading ? "Đang xử lý..." : "Đăng nhập"}
           </Button>
           <p className="text-sm text-muted-foreground text-center">
-            Chua co tai khoan?{" "}
+            Chưa có tài khoản?{" "}
             <Link href="/register" className="text-primary hover:underline">
-              Dang ky ngay
+              Đăng ký ngay
             </Link>
           </p>
         </CardFooter>

@@ -22,42 +22,42 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <div><h1 className="text-2xl font-bold">Bao cao & Xuat du lieu</h1><p className="text-muted-foreground">Tao bao cao va xuat du lieu benh nhan</p></div>
+      <div><h1 className="text-2xl font-bold">Báo cáo & Xuất dữ liệu</h1><p className="text-muted-foreground">Tạo báo cáo và xuất dữ liệu bệnh nhân</p></div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Tong benh nhan</p><p className="text-2xl font-bold">{patients.length}</p></CardContent></Card>
-        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Dang dieu tri</p><p className="text-2xl font-bold">{activePatients.length}</p></CardContent></Card>
-        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Tuan thu TB</p><p className="text-2xl font-bold">{avgCompliance}%</p></CardContent></Card>
-        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Hoan thanh</p><p className="text-2xl font-bold">{patients.filter((p) => p.status === "completed").length}</p></CardContent></Card>
+        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Tổng bệnh nhân</p><p className="text-2xl font-bold">{patients.length}</p></CardContent></Card>
+        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Đang điều trị</p><p className="text-2xl font-bold">{activePatients.length}</p></CardContent></Card>
+        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Tuân thủ TB</p><p className="text-2xl font-bold">{avgCompliance}%</p></CardContent></Card>
+        <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">Hoàn thành</p><p className="text-2xl font-bold">{patients.filter((p) => p.status === "completed").length}</p></CardContent></Card>
       </div>
 
       <Card>
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <CardTitle>Tao bao cao</CardTitle>
-              <CardDescription>Chon loai bao cao va khoang thoi gian</CardDescription>
+              <CardTitle>Tạo báo cáo</CardTitle>
+              <CardDescription>Chọn loại báo cáo và khoảng thời gian</CardDescription>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => alert("Xuat PDF...")}><FileText className="mr-2 h-4 w-4" />Xuat PDF</Button>
-              <Button variant="outline" onClick={() => alert("Xuat Excel...")}><FileSpreadsheet className="mr-2 h-4 w-4" />Xuat Excel</Button>
+              <Button variant="outline" onClick={() => alert("Xuất PDF...")}><FileText className="mr-2 h-4 w-4" />Xuất PDF</Button>
+              <Button variant="outline" onClick={() => alert("Xuất Excel...")}><FileSpreadsheet className="mr-2 h-4 w-4" />Xuất Excel</Button>
             </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex flex-wrap gap-4 items-end">
             <Tabs value={reportType} onValueChange={setReportType}>
-              <TabsList><TabsTrigger value="progress">Tien trien benh nhan</TabsTrigger><TabsTrigger value="compliance">Tuan thu dieu tri</TabsTrigger></TabsList>
+              <TabsList><TabsTrigger value="progress">Tiến triển bệnh nhân</TabsTrigger><TabsTrigger value="compliance">Tuân thủ điều trị</TabsTrigger></TabsList>
             </Tabs>
             <div className="flex gap-4">
-              <div className="space-y-1"><Label className="text-xs">Tu ngay</Label><Input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="w-[160px]" /></div>
-              <div className="space-y-1"><Label className="text-xs">Den ngay</Label><Input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="w-[160px]" /></div>
+              <div className="space-y-1"><Label className="text-xs">Từ ngày</Label><Input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="w-[160px]" /></div>
+              <div className="space-y-1"><Label className="text-xs">Đến ngày</Label><Input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="w-[160px]" /></div>
             </div>
           </div>
 
           {reportType === "progress" ? (
             <Table>
-              <TableHeader><TableRow><TableHead>Benh nhan</TableHead><TableHead>Chan doan</TableHead><TableHead>Tuan thu</TableHead><TableHead>Trang thai</TableHead><TableHead>Phien cuoi</TableHead></TableRow></TableHeader>
+              <TableHeader><TableRow><TableHead>Bệnh nhân</TableHead><TableHead>Chẩn đoán</TableHead><TableHead>Tuân thủ</TableHead><TableHead>Trạng thái</TableHead><TableHead>Phiên cuối</TableHead></TableRow></TableHeader>
               <TableBody>
                 {patients.map((p) => (
                   <TableRow key={p.id}>
@@ -77,7 +77,7 @@ export default function ReportsPage() {
                 <XAxis dataKey="week" fontSize={12} />
                 <YAxis fontSize={12} domain={[0, 100]} />
                 <Tooltip />
-                <Bar dataKey="rate" name="Ty le tuan thu (%)" fill="#0D9488" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="rate" name="Tỷ lệ tuân thủ (%)" fill="#0D9488" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

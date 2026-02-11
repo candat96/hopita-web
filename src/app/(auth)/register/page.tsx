@@ -39,7 +39,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
     if (form.password !== form.confirmPassword) {
-      setError("Mat khau xac nhan khong khop");
+      setError("Mật khẩu xác nhận không khớp");
       return;
     }
     setLoading(true);
@@ -52,15 +52,15 @@ export default function RegisterPage() {
   return (
     <Card className="shadow-xl border-0">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Dang ky tai khoan</CardTitle>
+        <CardTitle className="text-2xl">Đăng ký tài khoản</CardTitle>
         <CardDescription>
-          Tao tai khoan moi de su dung he thong Hopita
+          Tạo tài khoản mới để sử dụng hệ thống Hopita
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="fullName">Ho va ten</Label>
+            <Label htmlFor="fullName">Họ và tên</Label>
             <Input
               id="fullName"
               placeholder="Nguyen Van A"
@@ -81,7 +81,7 @@ export default function RegisterPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">So dien thoai</Label>
+            <Label htmlFor="phone">Số điện thoại</Label>
             <Input
               id="phone"
               type="tel"
@@ -92,22 +92,22 @@ export default function RegisterPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="role">Vai tro</Label>
+            <Label htmlFor="role">Vai trò</Label>
             <Select
               value={form.role}
               onValueChange={(v) => setForm({ ...form, role: v })}
             >
               <SelectTrigger id="role">
-                <SelectValue placeholder="Chon vai tro" />
+                <SelectValue placeholder="Chọn vai trò" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="doctor">Bac si</SelectItem>
+                <SelectItem value="doctor">Bác sĩ</SelectItem>
                 <SelectItem value="ktv">KTV</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Mat khau</Label>
+            <Label htmlFor="password">Mật khẩu</Label>
             <Input
               id="password"
               type="password"
@@ -118,7 +118,7 @@ export default function RegisterPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Xac nhan mat khau</Label>
+            <Label htmlFor="confirmPassword">Xác nhận mật khẩu</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -136,12 +136,12 @@ export default function RegisterPage() {
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Dang xu ly..." : "Dang ky"}
+            {loading ? "Đang xử lý..." : "Đăng ký"}
           </Button>
           <p className="text-sm text-muted-foreground text-center">
-            Da co tai khoan?{" "}
+            Đã có tài khoản?{" "}
             <Link href="/login" className="text-primary hover:underline">
-              Dang nhap
+              Đăng nhập
             </Link>
           </p>
         </CardFooter>

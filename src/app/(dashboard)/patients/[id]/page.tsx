@@ -15,11 +15,11 @@ import { ArrowLeft, Phone, Mail, Calendar } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 
 const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  active: { label: "Dang dieu tri", variant: "default" },
-  completed: { label: "Hoan thanh", variant: "secondary" },
-  attention: { label: "Can chu y", variant: "destructive" },
-  inactive: { label: "Ngung", variant: "outline" },
-  paused: { label: "Tam dung", variant: "outline" },
+  active: { label: "Đang điều trị", variant: "default" },
+  completed: { label: "Hoàn thành", variant: "secondary" },
+  attention: { label: "Cần chú ý", variant: "destructive" },
+  inactive: { label: "Ngừng", variant: "outline" },
+  paused: { label: "Tạm dừng", variant: "outline" },
 };
 
 function formatDate(d?: string) {
@@ -63,35 +63,35 @@ export default function PatientDetailPage() {
 
       <Tabs defaultValue="info" className="space-y-4">
         <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="info">Thong tin</TabsTrigger>
-          <TabsTrigger value="history">Lich su</TabsTrigger>
-          <TabsTrigger value="protocol">Phac do</TabsTrigger>
+          <TabsTrigger value="info">Thông tin</TabsTrigger>
+          <TabsTrigger value="history">Lịch sử</TabsTrigger>
+          <TabsTrigger value="protocol">Phác đồ</TabsTrigger>
           <TabsTrigger value="rom">ROM</TabsTrigger>
-          <TabsTrigger value="notes">Ghi chu</TabsTrigger>
+          <TabsTrigger value="notes">Ghi chú</TabsTrigger>
         </TabsList>
 
         <TabsContent value="info" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
-              <CardHeader><CardTitle className="text-base">Thong tin ca nhan</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-base">Thông tin cá nhân</CardTitle></CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Ngay sinh</p>
+                    <p className="text-sm text-muted-foreground">Ngày sinh</p>
                     <p className="font-medium">{formatDate(patient.dateOfBirth)}</p>
                   </div>
                 </div>
                 <Separator />
                 <div>
-                  <p className="text-sm text-muted-foreground">Gioi tinh</p>
-                  <p className="font-medium">{patient.gender === "male" ? "Nam" : "Nu"}</p>
+                  <p className="text-sm text-muted-foreground">Giới tính</p>
+                  <p className="font-medium">{patient.gender === "male" ? "Nam" : "Nữ"}</p>
                 </div>
                 <Separator />
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Dien thoai</p>
+                    <p className="text-sm text-muted-foreground">Điện thoại</p>
                     <p className="font-medium">{patient.phone}</p>
                   </div>
                 </div>
@@ -106,15 +106,15 @@ export default function PatientDetailPage() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle className="text-base">Thong tin dieu tri</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-base">Thông tin điều trị</CardTitle></CardHeader>
               <CardContent className="space-y-4">
-                <div><p className="text-sm text-muted-foreground">Chan doan</p><p className="font-medium">{patient.diagnosis}</p></div>
+                <div><p className="text-sm text-muted-foreground">Chẩn đoán</p><p className="font-medium">{patient.diagnosis}</p></div>
                 <Separator />
-                <div><p className="text-sm text-muted-foreground">Bac si</p><p className="font-medium">{patient.assignedDoctorName}</p></div>
+                <div><p className="text-sm text-muted-foreground">Bác sĩ</p><p className="font-medium">{patient.assignedDoctorName}</p></div>
                 <Separator />
-                <div><p className="text-sm text-muted-foreground">Phac do</p><p className="font-medium">{patient.currentProtocolName ?? "\u2014"}</p></div>
+                <div><p className="text-sm text-muted-foreground">Phác đồ</p><p className="font-medium">{patient.currentProtocolName ?? "\u2014"}</p></div>
                 <Separator />
-                <div><p className="text-sm text-muted-foreground">Tuan thu</p><p className="text-xl font-bold">{patient.complianceRate}%</p></div>
+                <div><p className="text-sm text-muted-foreground">Tuân thủ</p><p className="text-xl font-bold">{patient.complianceRate}%</p></div>
               </CardContent>
             </Card>
           </div>
@@ -122,7 +122,7 @@ export default function PatientDetailPage() {
 
         <TabsContent value="history">
           <Card>
-            <CardHeader><CardTitle className="text-base">Lich su dieu tri</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-base">Lịch sử điều trị</CardTitle></CardHeader>
             <CardContent>
               <div className="relative space-y-0">
                 {treatmentHistory.map((entry, i) => {
@@ -138,7 +138,7 @@ export default function PatientDetailPage() {
                           <p className="font-medium">{entry.protocolName}</p>
                           <Badge variant={s.variant}>{s.label}</Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{formatDate(entry.startDate)}{entry.endDate ? ` \u2013 ${formatDate(entry.endDate)}` : " \u2013 Hien tai"}</p>
+                        <p className="text-sm text-muted-foreground">{formatDate(entry.startDate)}{entry.endDate ? ` \u2013 ${formatDate(entry.endDate)}` : " \u2013 Hiện tại"}</p>
                         {entry.notes && <p className="text-sm">{entry.notes}</p>}
                       </div>
                     </div>
@@ -155,17 +155,17 @@ export default function PatientDetailPage() {
               <CardHeader>
                 <CardTitle className="text-base">{currentProtocol.name}</CardTitle>
                 <p className="text-sm text-muted-foreground">{currentProtocol.description}</p>
-                <p className="text-sm text-muted-foreground">Thoi gian: {currentProtocol.durationWeeks} tuan</p>
+                <p className="text-sm text-muted-foreground">Thời gian: {currentProtocol.durationWeeks} tuần</p>
               </CardHeader>
               <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Bai tap</TableHead>
+                      <TableHead>Bài tập</TableHead>
                       <TableHead>Sets</TableHead>
                       <TableHead>Reps</TableHead>
-                      <TableHead>Thoi gian</TableHead>
-                      <TableHead>Tan suat</TableHead>
+                      <TableHead>Thời gian</TableHead>
+                      <TableHead>Tần suất</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -183,18 +183,18 @@ export default function PatientDetailPage() {
               </CardContent>
             </Card>
           ) : (
-            <Card><CardContent className="py-8 text-center text-muted-foreground">Chua co phac do.</CardContent></Card>
+            <Card><CardContent className="py-8 text-center text-muted-foreground">Chưa có phác đồ.</CardContent></Card>
           )}
         </TabsContent>
 
         <TabsContent value="rom" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3">
-            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">ROM hien tai</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold">95&deg;</p></CardContent></Card>
-            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">ROM ban dau</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold">45&deg;</p></CardContent></Card>
-            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">Cai thien</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold text-green-600">+50&deg;</p></CardContent></Card>
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">ROM hiện tại</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold">95&deg;</p></CardContent></Card>
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">ROM ban đầu</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold">45&deg;</p></CardContent></Card>
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground">Cải thiện</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold text-green-600">+50&deg;</p></CardContent></Card>
           </div>
           <Card>
-            <CardHeader><CardTitle className="text-base">Bieu do ROM</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-base">Biểu đồ ROM</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={romData}>
@@ -213,7 +213,7 @@ export default function PatientDetailPage() {
 
         <TabsContent value="notes">
           <Card>
-            <CardHeader><CardTitle className="text-base">Ghi chu lam sang</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-base">Ghi chú lâm sàng</CardTitle></CardHeader>
             <CardContent className="space-y-4">
               {notes.map((note) => (
                 <div key={note.id} className="rounded-lg border p-4 space-y-2">
@@ -226,9 +226,9 @@ export default function PatientDetailPage() {
               ))}
               <Separator />
               <div className="space-y-3">
-                <p className="text-sm font-medium">Them ghi chu moi</p>
-                <Textarea placeholder="Nhap ghi chu..." value={newNote} onChange={(e) => setNewNote(e.target.value)} rows={3} />
-                <Button onClick={handleAddNote} disabled={!newNote.trim()}>Luu ghi chu</Button>
+                <p className="text-sm font-medium">Thêm ghi chú mới</p>
+                <Textarea placeholder="Nhập ghi chú..." value={newNote} onChange={(e) => setNewNote(e.target.value)} rows={3} />
+                <Button onClick={handleAddNote} disabled={!newNote.trim()}>Lưu ghi chú</Button>
               </div>
             </CardContent>
           </Card>

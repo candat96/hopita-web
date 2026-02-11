@@ -48,33 +48,33 @@ import Link from "next/link";
 
 const statCards = [
   {
-    title: "Tong benh nhan",
+    title: "Tổng bệnh nhân",
     value: dashboardStats.totalPatients,
-    description: `${dashboardStats.activePatients} dang dieu tri / ${dashboardStats.completedPatients} hoan thanh / ${dashboardStats.attentionPatients} can chu y`,
+    description: `${dashboardStats.activePatients} đang điều trị / ${dashboardStats.completedPatients} hoàn thành / ${dashboardStats.attentionPatients} cần chú ý`,
     icon: Users,
     trend: "+12%",
     trendUp: true,
   },
   {
-    title: "Lich hen sap toi",
+    title: "Lịch hẹn sắp tới",
     value: dashboardStats.upcomingAppointments,
-    description: "Trong 7 ngay toi",
+    description: "Trong 7 ngày tới",
     icon: CalendarDays,
     trend: "+2",
     trendUp: true,
   },
   {
-    title: "Ty le tuan thu",
+    title: "Tỷ lệ tuân thủ",
     value: `${dashboardStats.complianceRate}%`,
-    description: "Trung binh tat ca benh nhan",
+    description: "Trung bình tất cả bệnh nhân",
     icon: TrendingUp,
     trend: "+5%",
     trendUp: true,
   },
   {
-    title: "Canh bao",
+    title: "Cảnh báo",
     value: dashboardStats.alertsCount,
-    description: "Benh nhan can chu y",
+    description: "Bệnh nhân cần chú ý",
     icon: AlertTriangle,
     trend: "+1",
     trendUp: false,
@@ -89,7 +89,7 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground">
-          Tong quan tinh trang benh nhan va dieu tri
+          Tổng quan tình trạng bệnh nhân và điều trị
         </p>
       </div>
 
@@ -132,8 +132,8 @@ export default function DashboardPage() {
         {/* Compliance Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Ty le tuan thu bai tap</CardTitle>
-            <CardDescription>Compliance rate theo tuan</CardDescription>
+            <CardTitle>Tỷ lệ tuân thủ bài tập</CardTitle>
+            <CardDescription>Compliance rate theo tuần</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                   stroke="#0D9488"
                   strokeWidth={2}
                   dot={{ fill: "#0D9488" }}
-                  name="Ty le tuan thu (%)"
+                  name="Tỷ lệ tuân thủ (%)"
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -158,8 +158,8 @@ export default function DashboardPage() {
         {/* Progress Overview */}
         <Card>
           <CardHeader>
-            <CardTitle>Tien trien benh nhan</CardTitle>
-            <CardDescription>So luong benh nhan tien trien theo thang</CardDescription>
+            <CardTitle>Tiến triển bệnh nhân</CardTitle>
+            <CardDescription>Số lượng bệnh nhân tiến triển theo tháng</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -169,9 +169,9 @@ export default function DashboardPage() {
                 <YAxis fontSize={12} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="improved" name="Tien trien" fill="#0D9488" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="stable" name="On dinh" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="declined" name="Giam" fill="#EF4444" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="improved" name="Tiến triển" fill="#0D9488" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="stable" name="Ổn định" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="declined" name="Giảm" fill="#EF4444" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -184,22 +184,22 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Canh bao benh nhan</CardTitle>
+              <CardTitle>Cảnh báo bệnh nhân</CardTitle>
               <CardDescription>
-                Benh nhan tap sai hoac bo tap
+                Bệnh nhân tập sai hoặc bỏ tập
               </CardDescription>
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/patients?status=attention">Xem tat ca</Link>
+              <Link href="/patients?status=attention">Xem tất cả</Link>
             </Button>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Benh nhan</TableHead>
-                  <TableHead>Van de</TableHead>
-                  <TableHead>Tuan thu</TableHead>
+                  <TableHead>Bệnh nhân</TableHead>
+                  <TableHead>Vấn đề</TableHead>
+                  <TableHead>Tuân thủ</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -215,7 +215,7 @@ export default function DashboardPage() {
                     </TableCell>
                     <TableCell>
                       <span className="text-sm text-muted-foreground">
-                        {p.notes || "Can theo doi"}
+                        {p.notes || "Cần theo dõi"}
                       </span>
                     </TableCell>
                     <TableCell>
@@ -234,11 +234,11 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Lich hen sap toi</CardTitle>
-              <CardDescription>5 lich hen gan nhat</CardDescription>
+              <CardTitle>Lịch hẹn sắp tới</CardTitle>
+              <CardDescription>5 lịch hẹn gần nhất</CardDescription>
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/telehealth">Xem tat ca</Link>
+              <Link href="/telehealth">Xem tất cả</Link>
             </Button>
           </CardHeader>
           <CardContent>
@@ -280,8 +280,8 @@ export default function DashboardPage() {
                     {apt.type === "telehealth"
                       ? "Online"
                       : apt.type === "initial"
-                      ? "Lan dau"
-                      : "Tai kham"}
+                      ? "Lần đầu"
+                      : "Tái khám"}
                   </Badge>
                 </div>
               ))}

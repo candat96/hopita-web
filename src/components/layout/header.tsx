@@ -33,7 +33,7 @@ export function Header({ onMenuClick }: HeaderProps) {
       <div className="relative flex-1 max-w-md">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
-          placeholder="Tim kiem benh nhan, phac do..."
+          placeholder="Tìm kiếm bệnh nhân, phác đồ..."
           className="pl-9"
         />
       </div>
@@ -49,29 +49,29 @@ export function Header({ onMenuClick }: HeaderProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-80">
-            <DropdownMenuLabel>Thong bao</DropdownMenuLabel>
+            <DropdownMenuLabel>Thông báo</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="flex flex-col items-start gap-1 cursor-pointer">
-              <span className="font-medium text-sm">Canh bao bo tap</span>
+              <span className="font-medium text-sm">Cảnh báo bỏ tập</span>
               <span className="text-xs text-muted-foreground">
-                Pham Duc Minh da bo tap 5 ngay lien tiep
+                Phạm Đức Minh đã bỏ tập 5 ngày liên tiếp
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem className="flex flex-col items-start gap-1 cursor-pointer">
-              <span className="font-medium text-sm">Tap sai tu the</span>
+              <span className="font-medium text-sm">Tập sai tư thế</span>
               <span className="text-xs text-muted-foreground">
-                Dang Quoc Bao tap sai tu the bai Cang co bap chan
+                Đặng Quốc Bảo tập sai tư thế bài Căng cơ bắp chân
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem className="flex flex-col items-start gap-1 cursor-pointer">
-              <span className="font-medium text-sm">Lich hen sap toi</span>
+              <span className="font-medium text-sm">Lịch hẹn sắp tới</span>
               <span className="text-xs text-muted-foreground">
-                Lich hen voi Tran Thi Mai luc 09:00 ngay 12/02
+                Lịch hẹn với Trần Thị Mai lúc 09:00 ngày 12/02
               </span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-center text-primary cursor-pointer justify-center">
-              Xem tat ca thong bao
+              Xem tất cả thông báo
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -88,13 +88,13 @@ export function Header({ onMenuClick }: HeaderProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Tai khoan</DropdownMenuLabel>
+            <DropdownMenuLabel>Tài khoản</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Ho so ca nhan</DropdownMenuItem>
-            <DropdownMenuItem>Cai dat</DropdownMenuItem>
+            <DropdownMenuItem>Hồ sơ cá nhân</DropdownMenuItem>
+            <DropdownMenuItem>Cài đặt</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-destructive">
-              Dang xuat
+              Đăng xuất
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -17,10 +17,10 @@ import {
 import { Eye, Plus, Search } from "lucide-react";
 
 const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  active: { label: "Dang dieu tri", variant: "default" },
-  completed: { label: "Hoan thanh", variant: "secondary" },
-  attention: { label: "Can chu y", variant: "destructive" },
-  inactive: { label: "Ngung", variant: "outline" },
+  active: { label: "Đang điều trị", variant: "default" },
+  completed: { label: "Hoàn thành", variant: "secondary" },
+  attention: { label: "Cần chú ý", variant: "destructive" },
+  inactive: { label: "Ngừng", variant: "outline" },
 };
 
 function getComplianceBadge(rate: number) {
@@ -42,10 +42,10 @@ export default function PatientsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold">Danh sach benh nhan</h1>
+        <h1 className="text-2xl font-bold">Danh sách bệnh nhân</h1>
         <Button>
           <Plus className="mr-2 h-4 w-4" />
-          Them benh nhan
+          Thêm bệnh nhân
         </Button>
       </div>
 
@@ -54,17 +54,17 @@ export default function PatientsPage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Tim kiem theo ten..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+              <Input placeholder="Tìm kiếm theo tên..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-full sm:w-[200px]">
-                <SelectValue placeholder="Trang thai" />
+                <SelectValue placeholder="Trạng thái" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Tat ca</SelectItem>
-                <SelectItem value="active">Dang dieu tri</SelectItem>
-                <SelectItem value="completed">Hoan thanh</SelectItem>
-                <SelectItem value="attention">Can chu y</SelectItem>
+                <SelectItem value="all">Tất cả</SelectItem>
+                <SelectItem value="active">Đang điều trị</SelectItem>
+                <SelectItem value="completed">Hoàn thành</SelectItem>
+                <SelectItem value="attention">Cần chú ý</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -73,20 +73,23 @@ export default function PatientsPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Ho ten</TableHead>
-                <TableHead className="hidden md:table-cell">Chan doan</TableHead>
-                <TableHead className="hidden lg:table-cell">Phac do</TableHead>
-                <TableHead>Tuan thu</TableHead>
-                <TableHead className="hidden sm:table-cell">Phien cuoi</TableHead>
-                <TableHead>Trang thai</TableHead>
+                <TableHead>Họ tên</TableHead>
+                <TableHead>SĐT</TableHead>
+                <TableHead>Tuổi</TableHead>
+                <TableHead>Giới tính</TableHead>
+                <TableHead className="hidden md:table-cell">Chẩn đoán</TableHead>
+                <TableHead className="hidden lg:table-cell">Phác đồ</TableHead>
+                <TableHead>Tuân thủ</TableHead>
+                <TableHead className="hidden sm:table-cell">Phiên cuối</TableHead>
+                <TableHead>Trạng thái</TableHead>
                 <TableHead className="w-[60px]" />
               </TableRow>
             </TableHeader>
             <TableBody>
               {filtered.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
-                    Khong tim thay benh nhan nao.
+                  <TableCell colSpan={10} className="text-center text-muted-foreground py-8">
+                    Không tìm thấy bệnh nhân nào.
                   </TableCell>
                 </TableRow>
               ) : (
@@ -100,6 +103,9 @@ export default function PatientsPage() {
                           {patient.fullName}
                         </Link>
                       </TableCell>
+                      <TableCell className="whitespace-nowrap">{patient.phone}</TableCell>
+                      <TableCell>{Math.floor((Date.now() - new Date(patient.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000))}</TableCell>
+                      <TableCell>{patient.gender === "male" ? "Nam" : "Nữ"}</TableCell>
                       <TableCell className="hidden md:table-cell max-w-[200px] truncate">{patient.diagnosis}</TableCell>
                       <TableCell className="hidden lg:table-cell">{patient.currentProtocolName ?? "\u2014"}</TableCell>
                       <TableCell>
